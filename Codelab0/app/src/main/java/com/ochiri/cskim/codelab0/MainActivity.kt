@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -53,10 +55,11 @@ fun OnboardingScreen(onContinuclicked: () -> Unit)
 }
 
 @Composable
-fun Greetings(names: List<String> = listOf("World", "Compose")) {
+fun Greetings(names: List<String> = List(1000){ "$it"}) {
     Surface(color = MaterialTheme.colors.background) {
-        Column(modifier = Modifier.padding(vertical = 4.dp)) {
-            for (name in names) Greeting(name = name)
+        LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+            items(items = names) { name ->
+                Greeting(name = name)}
         }
     }
 }
@@ -79,7 +82,7 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello,")
-                Text(text = "$name!")
+                Text(text = "$name")
             }
             OutlinedButton(onClick = { expanded.value = !expanded.value }) {
                 Text(if(expanded.value) "Show less" else "Show more")
@@ -93,6 +96,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     Codelab0Theme {
-        MyApp()
+        Greetings()
     }
 }
