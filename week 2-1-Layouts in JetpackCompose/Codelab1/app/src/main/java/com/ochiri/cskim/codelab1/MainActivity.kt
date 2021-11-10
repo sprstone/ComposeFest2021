@@ -71,7 +71,9 @@ fun LayoutsCodelab() {
     ) {
             //innerPadding -> ScrollingList(Modifier.padding(innerPadding).padding(8.dp))
             innerPadding ->
-        BodyContent(Modifier.padding(innerPadding).padding(8.dp))
+        BodyContent(
+            Modifier
+                .padding(innerPadding))
     }
 }
 
@@ -126,13 +128,19 @@ fun BodyContent(modifier: Modifier = Modifier) {
         Text("We've done it by hand!")
     }*/
 
-    Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
-        StaggeredGrid(modifier = modifier, rows = 5) {
-            for (topic in topics) {
-                Chip(modifier = Modifier.padding(8.dp), text = topic)
+    Row(modifier = modifier
+        .background(color = Color.LightGray)
+        .padding(16.dp)
+        .size(200.dp)
+        .horizontalScroll(rememberScrollState()),
+        content = {
+            StaggeredGrid(modifier = modifier, rows = 4) {
+                for (topic in topics) {
+                    Chip(modifier = Modifier.padding(8.dp), text = topic)
+                }
+
             }
-        }
-    }
+        })
 }
 
 val topics = listOf(
@@ -217,7 +225,8 @@ fun Chip(modifier: Modifier = Modifier, text: String) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
-                modifier = Modifier.size(16.dp, 16.dp)
+                modifier = Modifier
+                    .size(16.dp, 16.dp)
                     .background(color = MaterialTheme.colors.secondary)
             )
             Spacer(Modifier.width(4.dp))
