@@ -32,9 +32,9 @@ import com.example.compose.rally.ui.overview.OverviewBody
  */
 enum class RallyScreen(
     val icon: ImageVector,
-    val body: @Composable ((String) -> Unit) -> Unit
+    //val body: @Composable ((String) -> Unit) -> Unit
 ) {
-    Overview(
+    /*Overview(
         icon = Icons.Filled.PieChart,
         body = { OverviewBody() }
     ),
@@ -50,7 +50,17 @@ enum class RallyScreen(
     @Composable
     fun content(onScreenChange: (String) -> Unit) {
         body(onScreenChange)
-    }
+    }*/
+
+    Overview(
+    icon = Icons.Filled.PieChart,
+    ),
+    Accounts(
+    icon = Icons.Filled.AttachMoney,
+    ),
+    Bills(
+    icon = Icons.Filled.MoneyOff,
+    );
 
     companion object {
         fun fromRoute(route: String?): RallyScreen =
